@@ -70,15 +70,11 @@ var createQuestion1 = function() {
     q1AnswerList.appendChild(innerList1Div4);
     innerList1Div4.appendChild(q1a4);
     
-    
-
-    
-}
-// loop through all possible incorrect buttons to return alert that it's wrong
+    // loop through all possible incorrect buttons to return alert that it's wrong
 var incorrectAnswers = document.getElementsByClassName("incorrect"); 
-for (var i=0; i <incorrectAnswers.length; i++) {
+for (var i=0; i < incorrectAnswers.length; i++) {
     incorrectAnswers[i].addEventListener("click", function() {
-        incorrectAlert
+        incorrectAlert();
         timeLeft = timeLeft - 10;
     })
 };
@@ -89,6 +85,8 @@ for (var i=0; i < correctAnswers.length; i++) {
         correctAlert();
     })
 };
+}
+
 
 
     
