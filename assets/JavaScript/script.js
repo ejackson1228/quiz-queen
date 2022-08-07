@@ -20,34 +20,59 @@ var createQuestion1 = function() {
     var q1a1 = document.createElement("li");
     q1a1.className = "answers"
     q1a1.id = "incorrect1";
-    q1a1.innerHTML = "<button class='answersbutton' id='incorrect'>HyperText Marketing Language</button>";
-    q1AnswerList.appendChild(q1a1);
+    q1a1.innerHTML = "<button class='answersbutton'>HyperText Marketing Language</button>";
+    
     var q1a2 = document.createElement("li");
     q1a2.className= "answers"
     q1a2.id = "incorrect2";
-    q1a2.innerHTML  = "<button class='answersbutton' id='incorrect'>HyperTrophy Muscular Liability</button>";
-    q1AnswerList.appendChild(q1a2);
+    q1a2.innerHTML  = "<button class='answersbutton'>HyperTrophy Muscular Liability</button>";
+    
     var q1a3 = document.createElement("li");
     q1a3.className = "answers";
     q1a3.id = "correct";
-    q1a3.innerHTML = "<button class='answersbutton' id='correct'>HyperText Markup Language</button>";
-    q1AnswerList.appendChild(q1a3);
+    q1a3.innerHTML = "<button class='answersbutton'>HyperText Markup Language</button>";
+    
     var q1a4 = document.createElement("li");
     q1a4.className = "answers";
     q1a4.id = "incorrect3";
-    q1a4.innerHTML = "<button class='answersbutton' id='incorrect'>HollowText Markdown Legend</button>";
-    q1AnswerList.appendChild(q1a4);
+    q1a4.innerHTML = "<button class='answersbutton'>HollowText Markdown Legend</button>";
     
+    var innerList1Div1 = document.createElement("div");
+    innerList1Div1.className = "incorrect";
+    q1AnswerList.appendChild(innerList1Div1);
+    innerList1Div1.appendChild(q1a1);
+    
+    var innerList1Div2 = document.createElement("div");
+    innerList1Div2.className = "incorrect";
+    q1AnswerList.appendChild(innerList1Div2);
+    innerList1Div2.appendChild(q1a2);
+    
+    var innerList1Div3 = document.createElement("div");
+    innerList1Div3.className = "correct";
+    q1AnswerList.appendChild(innerList1Div3);
+    innerList1Div3.appendChild(q1a3);
+    
+    var innerList1Div4 = document.createElement("div");
+    innerList1Div4.className = "incorrect";
+    q1AnswerList.appendChild(innerList1Div4);
+    innerList1Div4.appendChild(q1a4);
     
     
 
     
 }
+// loop through all possible incorrect buttons to return alert that it's wrong
+var incorrectAnswers = document.getElementsByClassName("incorrect");
+for (var i=0; i <incorrectAnswers.length; i++) {
+    incorrectAnswers[i].addEventListener("click", incorrectAlert);
+}
+// loop through all possible correct answers to return alert if it's right
+var correctAnswers = document.getElementsByClassName("correct");
+for (var i=0; i < correctAnswers.length; i++) {
+    correctAnswers[i].addEventListener("click", correctAlert);
+}
 
-var incorrectAnswers = document.querySelectorAll("incorrect1", "incorrect2", "incorrect3");
-incorrectAnswers.addEventListener("click", incorrectAlert);
 
-document.getElementById('correct').addEventListener("click", correctAlert);
     
     
 var incorrectAlert = function() {
