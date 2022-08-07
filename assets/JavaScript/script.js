@@ -13,19 +13,23 @@ var createQuestion1 = function() {
     timerEl.id = "insertTimer";
     timerEl.className = "timeQuiz";
     headerForTimer.appendChild(timerEl);
-    // elements for question q
+    // removing elements of starting page
     document.querySelector("#firstpage");
     firstpage.remove();
+    //elements for question 1
     var page2 = document.createElement("div");
     document.querySelector("#pagecontainer");
     pagecontainer.appendChild(page2);
+    
     var question1 = document.createElement("h2");
     question1.className = "questions"
     question1.innerHTML = "<h2 class='questions'>What does HTML stand for?</h2>";
     page2.appendChild(question1)
+    
     var q1AnswerList = document.createElement("ul");
     q1AnswerList.className = "answerslist";
     page2.appendChild(q1AnswerList);
+    
     var q1a1 = document.createElement("li");
     q1a1.className = "answers"
     q1a1.id = "incorrect1";
@@ -97,14 +101,14 @@ var incorrectAlert = function() {
     window.alert("Correct! On to the next question.")
 };
 
-
+// timer set at 2 minutes with wrong answer subtracting time
 var timeLeft = 120;
 var quizTimer = setInterval(function(){
-    if(timeLeft <= 0){
+    if(timeLeft <= 0){ //if time left = 0, alert the user and go back to starting page
         clearInterval(quizTimer);
         window.alert("Time's up!");
         window.location.reload();
-    } else {
+    } else { // if time > 0, display time left
         document.getElementById("insertTimer").innerHTML = timeLeft + " seconds left";
     }
     document.getElementById("insertTimer").value = 120 - timeLeft;
@@ -112,5 +116,5 @@ var quizTimer = setInterval(function(){
 }, 1000);
 
 
-
+// starting page button to initiate quiz
 startbutton.addEventListener("click", initiateQuiz); 
