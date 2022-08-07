@@ -5,6 +5,15 @@ var initiateQuiz = function(){
 }
 
 var createQuestion1 = function() {
+    // elements for timer
+    var headerForTimer = document.createElement("header");
+    document.getElementById("#body");
+    body.appendChild(headerForTimer);
+    var timerEl = document.createElement("p");
+    timerEl.id = "insertTimer";
+    timerEl.className = "timeQuiz";
+    headerForTimer.appendChild(timerEl);
+    // elements for question q
     document.querySelector("#firstpage");
     firstpage.remove();
     var page2 = document.createElement("div");
@@ -62,15 +71,20 @@ var createQuestion1 = function() {
     
 }
 // loop through all possible incorrect buttons to return alert that it's wrong
-var incorrectAnswers = document.getElementsByClassName("incorrect");
+var incorrectAnswers = document.getElementsByClassName("incorrect"); 
 for (var i=0; i <incorrectAnswers.length; i++) {
-    incorrectAnswers[i].addEventListener("click", incorrectAlert);
-}
+    incorrectAnswers[i].addEventListener("click", function() {
+        incorrectAlert
+        timeLeft = timeLeft - 10;
+    })
+};
 // loop through all possible correct answers to return alert if it's right
-var correctAnswers = document.getElementsByClassName("correct");
+var correctAnswers = document.getElementsByClassName("correct"); 
 for (var i=0; i < correctAnswers.length; i++) {
-    correctAnswers[i].addEventListener("click", correctAlert);
-}
+    correctAnswers[i].addEventListener("click", function() {
+        correctAlert();
+    })
+};
 
 
     
@@ -83,4 +97,20 @@ var incorrectAlert = function() {
     window.alert("Correct! On to the next question.")
 };
 
-startbutton.addEventListener("click", initiateQuiz);
+
+var timeLeft = 120;
+var quizTimer = setInterval(function(){
+    if(timeLeft <= 0){
+        clearInterval(quizTimer);
+        window.alert("Time's up!");
+        window.location.reload();
+    } else {
+        document.getElementById("insertTimer").innerHTML = timeLeft + " seconds left";
+    }
+    document.getElementById("insertTimer").value = 120 - timeLeft;
+    timeLeft -= 1;
+}, 1000);
+
+
+
+startbutton.addEventListener("click", initiateQuiz); 
