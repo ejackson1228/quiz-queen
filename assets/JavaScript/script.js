@@ -239,15 +239,167 @@ var createQuestion3 = function() {
         for (var i=0; i < correctAnswers.length; i++) {
             correctAnswers[i].addEventListener("click", function() {
                 correctAlert();
-                // createQuestion4();
+                createQuestion4();
             })
         };
 }
 
 var createQuestion4 = function() {
-    
+    // remove elements from question 3
+    document.getElementById("#page4");
+    page4.remove();
+    // generate HTML for page 5
+    var page5 = document.createElement("div");
+    page5.id = "page5";
+    document.querySelector("#pagecontainer");
+    pagecontainer.appendChild(page5);
+
+    var question4 = document.createElement("h2");
+    question4.className = "questions";
+    question4.innerHTML = "<h2 class='questions'>What does DOM stand for?</h2>";
+    page5.appendChild(question4);
+
+    var q4AnswerList = document.createElement("ul");
+    q4AnswerList.className = "answerslist";
+    page5.appendChild(q4AnswerList);
+
+    var q4a1 = document.createElement("li");
+    q4a1.className = "answers";
+    q4a1.id = "correct";
+    q4a1.innerHTML = "<button class='answersbutton'>Document Object Model</button>";
+
+    var q4a2 = document.createElement("li");
+    q4a2.className= "answers";
+    q4a2.id = "incorrect1";
+    q4a2.innerHTML  = "<button class='answersbutton'>Document Operating Manager</button>";
+
+    var q4a3 = document.createElement("li");
+    q4a3.className = "answers";
+    q4a3.id = "incorrect2";
+    q4a3.innerHTML = "<button class='answersbutton'>Domain Operations Manual</button>";
+
+    var q4a4 = document.createElement("li");
+    q4a4.className = "answers";
+    q4a4.id = "incorrect3";
+    q4a4.innerHTML = "<button class='answersbutton'>Document Object Motor</button>";
+
+    var innerList4Div1 = document.createElement("div");
+    innerList4Div1.className = "correct";
+    q4AnswerList.appendChild(innerList4Div1);
+    innerList4Div1.appendChild(q4a1);
+
+    var innerList4Div2 = document.createElement("div");
+    innerList4Div2.className = "incorrect";
+    q4AnswerList.appendChild(innerList4Div2);
+    innerList4Div2.appendChild(q4a2);
+
+    var innerList4Div3 = document.createElement("div");
+    innerList4Div3.className = "incorrect";
+    q4AnswerList.appendChild(innerList4Div3);
+    innerList4Div3.appendChild(q4a3);
+
+    var innerList4Div4 = document.createElement("div");
+    innerList4Div4.className = "incorrect";
+    q4AnswerList.appendChild(innerList4Div4);
+    innerList4Div4.appendChild(q4a4);
+
+        // loop through all possible incorrect buttons to return alert that it's wrong and subtract time 
+    var incorrectAnswers = document.getElementsByClassName("incorrect"); 
+        for (var i=0; i < incorrectAnswers.length; i++) {
+            incorrectAnswers[i].addEventListener("click", function() {
+                incorrectAlert();
+                timeLeft = timeLeft - 10;
+            })
+        };
+    // loop through all possible correct answers to return alert if it's right
+    var correctAnswers = document.getElementsByClassName("correct"); 
+        for (var i=0; i < correctAnswers.length; i++) {
+            correctAnswers[i].addEventListener("click", function() {
+                correctAlert();
+                createQuestion5();
+            })
+        };
+
 }
     
+var createQuestion5 = function() {
+    // remove elements from question 4
+    document.getElementById("#page5");
+    page5.remove();
+    // generate HTML for page 6
+    var page6 = document.createElement("div");
+    page6.id = "page6";
+    document.querySelector("#pagecontainer");
+    pagecontainer.appendChild(page6);
+
+    var question5 = document.createElement("h2");
+    question5.className = "questions";
+    question5.innerHTML = "<h2 class='questions'>How do you write an IF statement for executing some code if 'i' is NOT equal to 5?</h2>";
+    page6.appendChild(question5);
+
+    var q5AnswerList = document.createElement("ul");
+    q5AnswerList.className = "answerslist";
+    page6.appendChild(q5AnswerList);
+
+    var q5a1 = document.createElement("li");
+    q5a1.className = "answers";
+    q5a1.id = "incorrect1";
+    q5a1.innerHTML = "<button class='answersbutton'>if i!=5 then</button>";
+
+    var q5a2 = document.createElement("li");
+    q5a2.className= "answers";
+    q5a2.id = "incorrect2";
+    q5a2.innerHTML  = "<button class='answersbutton'>if i <> 5</button>";
+
+    var q5a3 = document.createElement("li");
+    q5a3.className = "answers";
+    q5a3.id = "incorrect3";
+    q5a3.innerHTML = "<button class='answersbutton'>if (i<> 5)</button>";
+
+    var q5a4 = document.createElement("li");
+    q5a4.className = "answers";
+    q5a4.id = "correct";
+    q5a4.innerHTML = "<button class='answersbutton'>if (i!=5)</button>";
+
+    var innerList5Div1 = document.createElement("div");
+    innerList5Div1.className = "incorrect";
+    q5AnswerList.appendChild(innerList5Div1);
+    innerList5Div1.appendChild(q5a1);
+
+    var innerList5Div2 = document.createElement("div");
+    innerList5Div2.className = "incorrect";
+    q5AnswerList.appendChild(innerList5Div2);
+    innerList5Div2.appendChild(q5a2);
+
+    var innerList5Div3 = document.createElement("div");
+    innerList5Div3.className = "incorrect";
+    q5AnswerList.appendChild(innerList5Div3);
+    innerList5Div3.appendChild(q5a3);
+
+    var innerList5Div4 = document.createElement("div");
+    innerList5Div4.className = "correct";
+    q5AnswerList.appendChild(innerList5Div4);
+    innerList5Div4.appendChild(q5a4);
+
+    // loop through all possible incorrect buttons to return alert that it's wrong and subtract time 
+    var incorrectAnswers = document.getElementsByClassName("incorrect"); 
+      for (var i=0; i < incorrectAnswers.length; i++) {
+          incorrectAnswers[i].addEventListener("click", function() {
+              incorrectAlert();
+              timeLeft = timeLeft - 10;
+          })
+      };
+    // loop through all possible correct answers to return alert if it's right
+    var correctAnswers = document.getElementsByClassName("correct"); 
+      for (var i=0; i < correctAnswers.length; i++) {
+          correctAnswers[i].addEventListener("click", function() {
+              window.alert("Correct! That was the final question. Click 'Okay' to go to the next page and submit your score!")
+              // function time left = high score
+          })
+      };
+
+}
+
 var incorrectAlert = function() {
     window.alert("Incorrect! Try again!")
 };
@@ -267,8 +419,16 @@ var quizTimer = setInterval(function(){
         document.getElementById("insertTimer").innerHTML = timeLeft + " seconds left";
     }
     document.getElementById("insertTimer").value = 120 - timeLeft;
-    timeLeft -= 1;
+    timeLeft -= 1; //decrement timer per second
 }, 1000);
+
+var stopTimer = function () {
+    if(timeLeft!== null) {
+        clearInterval(quizTimer);
+        saveTime(timeLeft); 
+        timeLeft = null;
+    }
+}
 
 
 // starting page button to initiate quiz
