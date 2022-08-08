@@ -89,7 +89,7 @@ for (var i=0; i < correctAnswers.length; i++) {
 };
 }
 
-var createQuestion2 = function (){
+var createQuestion2 = function () {
     // removing elements from question 1
     document.getElementById("#page2");
     page2.remove();
@@ -161,14 +161,92 @@ var createQuestion2 = function (){
     for (var i=0; i < correctAnswers.length; i++) {
         correctAnswers[i].addEventListener("click", function() {
             correctAlert();
-            // createQuestion3();
+            createQuestion3();
         })
     };
 }
 
-
-
+var createQuestion3 = function() {
+    // remove elements from question 2
+    document.getElementById("#page3");
+    page3.remove();
+    // generate HTML for page 4
+    var page4 = document.createElement("div");
+    page4.id = "page4";
+    document.querySelector("#pagecontainer");
+    pagecontainer.appendChild(page4);
     
+    var question3 = document.createElement("h2");
+    question3.className = "questions";
+    question3.innerHTML = "<h2 class='questions'>What is the correct syntax for referring to an external script called 'xxx.js'?</h2>";
+    page4.appendChild(question3);
+    
+    var q3AnswerList = document.createElement("ul");
+    q3AnswerList.className = "answerslist";
+    page4.appendChild(q3AnswerList);
+    
+    var q3a1 = document.createElement("li");
+    q3a1.className = "answers";
+    q3a1.id = "incorrect1";
+    q3a1.innerHTML = "<button class='answersbutton'>script href='xxx.js'</button>";
+    
+    var q3a2 = document.createElement("li");
+    q3a2.className= "answers";
+    q3a2.id = "correct";
+    q3a2.innerHTML  = "<button class='answersbutton'>script src='xxx.js'</button>";
+    
+    var q3a3 = document.createElement("li");
+    q3a3.className = "answers";
+    q3a3.id = "incorrect2";
+    q3a3.innerHTML = "<button class='answersbutton'>script name='xxx.js'</button>";
+    
+    var q3a4 = document.createElement("li");
+    q3a4.className = "answers";
+    q3a4.id = "incorrect3";
+    q3a4.innerHTML = "<button class='answersbutton'>script alt='xxx.js'</button>";
+    
+    var innerList3Div1 = document.createElement("div");
+    innerList3Div1.className = "incorrect";
+    q3AnswerList.appendChild(innerList3Div1);
+    innerList3Div1.appendChild(q3a1);
+    
+    var innerList3Div2 = document.createElement("div");
+    innerList3Div2.className = "correct";
+    q3AnswerList.appendChild(innerList3Div2);
+    innerList3Div2.appendChild(q3a2);
+    
+    var innerList3Div3 = document.createElement("div");
+    innerList3Div3.className = "incorrect";
+    q3AnswerList.appendChild(innerList3Div3);
+    innerList3Div3.appendChild(q3a3);
+    
+    var innerList3Div4 = document.createElement("div");
+    innerList3Div4.className = "incorrect";
+    q3AnswerList.appendChild(innerList3Div4);
+    innerList3Div4.appendChild(q3a4);
+
+
+    // loop through all possible incorrect buttons to return alert that it's wrong and subtract time 
+    var incorrectAnswers = document.getElementsByClassName("incorrect"); 
+        for (var i=0; i < incorrectAnswers.length; i++) {
+            incorrectAnswers[i].addEventListener("click", function() {
+                incorrectAlert();
+                timeLeft = timeLeft - 10;
+            })
+        };
+    // loop through all possible correct answers to return alert if it's right
+    var correctAnswers = document.getElementsByClassName("correct"); 
+        for (var i=0; i < correctAnswers.length; i++) {
+            correctAnswers[i].addEventListener("click", function() {
+                correctAlert();
+                // createQuestion4();
+            })
+        };
+}
+
+var createQuestion4 = function() {
+    
+}
     
 var incorrectAlert = function() {
     window.alert("Incorrect! Try again!")
