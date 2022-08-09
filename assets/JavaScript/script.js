@@ -410,6 +410,7 @@ var createHighScorePage = function() {
     insertTimer.remove();
     // generate HTML for high score submission page
     var page7 = document.createElement("div");
+    page7.id = "page7"
     document.querySelector("#pagecontainer");
     pagecontainer.appendChild(page7);
 
@@ -433,12 +434,49 @@ var createHighScorePage = function() {
     highScoreForm.appendChild(highScoreFormInput);
 
     var userFinalScore = document.createElement("p");
-    userFinalScore.innerHTML = "<p> Your Score:  + ; " //finish code to show user score
+    userFinalScore.innerHTML = "<p> Your Score: " +  localStorage.getItem("userScore") ;
     highScoreForm.appendChild(userFinalScore);
 
     var scoreSubmitbutton = document.createElement("button");
+    scoreSubmitbutton.id = "submit-user-results"
     scoreSubmitbutton.className = "score-submit-button";
+    scoreSubmitbutton.textContent = "Submit"
     page7.appendChild(scoreSubmitbutton);
+    
+    var highScorePageButton = document.createElement("button");
+    highScorePageButton.textContent = "Go To HighScore Page";
+    page7.appendChild(highScorePageButton);
+
+    var saveUserName = function() {
+        localStorage.setItem("userNames", highScoreFormInput.value)
+    }
+    
+    scoreSubmitbutton.addEventListener("click", function() {
+        saveUserName();
+    });
+    highScorePageButton.addEventListener("click", function() {
+        createHighScoreList();
+    });
+}
+
+var createHighScoreList = function() {
+    document.querySelector("#page7")
+    page7.remove();
+
+    var page8 = document.createElement("div");
+    page8.id = "page8";
+    document.querySelector("#pagecontainer");
+    pagecontainer.appendChild(page8);
+
+    var highScoreList = document.createElement("ul");
+    highScoreList.id = "HSList";
+    highScoreList.className = "High-scores"
+    highScoreList.textContent = "High Scores";
+    page8.appendChild(highScoreList);
+
+    
+
+
 }
 
 
@@ -464,11 +502,21 @@ var quizTimer = setInterval(function(){
     timeLeft -= 1; //decrement timer per second
 }, 1000);
 //stop timer and setItem in local storage for high score
+var saveTime = function () {
+    localStorage.setItem("userScores", timeLeft);
+}
+
+var userNames  = [];
+var userScores = [];
+
+
+
+console.log(saveTime)
 var stopTimer = function () {
     if(timeLeft!== null) {
+        saveTime();
         clearInterval(quizTimer);
-        saveTime(timeLeft); 
-        timeLeft = null;
+        // timeLeft = null;
     }
 }
 
