@@ -394,11 +394,53 @@ var createQuestion5 = function() {
       for (var i=0; i < correctAnswers.length; i++) {
           correctAnswers[i].addEventListener("click", function() {
               window.alert("Correct! That was the final question. Click 'Okay' to go to the next page and submit your score!")
-              // function time left = high score
+              createHighScorePage();
+              stopTimer();
           })
       };
 
 }
+
+var createHighScorePage = function() {
+    // remove elements from question 5
+    document.querySelector("#page6");
+    page6.remove();
+    //remove timer for questions
+    document.querySelector("#insertTimer");
+    insertTimer.remove();
+    // generate HTML for high score submission page
+    var page7 = document.createElement("div");
+    document.querySelector("#pagecontainer");
+    pagecontainer.appendChild(page7);
+
+    var highScoreHeader = document.createElement("h2");
+    highScoreHeader.className = "questions";
+    highScoreHeader.innerHTML = "<h2 class='questions'>Enter your initials below to submit your score!</h2>";
+    page7.appendChild(highScoreHeader);
+
+    var highScoreForm = document.createElement("form");
+    highScoreForm.className = "score-form";
+    page7.appendChild(highScoreForm);
+
+    var highScoreFormLabel = document.createElement("label");
+    highScoreFormLabel.className = "score-form-label"
+    highScoreFormLabel.innerHTML = "<label class='score-form-label'>Enter your initials: </label>"
+    highScoreForm.appendChild(highScoreFormLabel);
+
+    var highScoreFormInput = document.createElement("input");
+    highScoreFormInput.type = "text";
+    highScoreFormInput.id = "user-name";
+    highScoreForm.appendChild(highScoreFormInput);
+
+    var userFinalScore = document.createElement("p");
+    userFinalScore.innerHTML = "<p> Your Score:  + ; " //finish code to show user score
+    highScoreForm.appendChild(userFinalScore);
+
+    var scoreSubmitbutton = document.createElement("button");
+    scoreSubmitbutton.className = "score-submit-button";
+    page7.appendChild(scoreSubmitbutton);
+}
+
 
 var incorrectAlert = function() {
     window.alert("Incorrect! Try again!")
@@ -414,14 +456,14 @@ var quizTimer = setInterval(function(){
     if(timeLeft <= 0){ //if time left = 0, alert the user and go back to starting page
         clearInterval(quizTimer);
         window.alert("Time's up!");
-        window.location.reload();
+        // window.location.reload();
     } else { // if time > 0, display time left
         document.getElementById("insertTimer").innerHTML = timeLeft + " seconds left";
     }
     document.getElementById("insertTimer").value = 120 - timeLeft;
     timeLeft -= 1; //decrement timer per second
 }, 1000);
-
+//stop timer and setItem in local storage for high score
 var stopTimer = function () {
     if(timeLeft!== null) {
         clearInterval(quizTimer);
