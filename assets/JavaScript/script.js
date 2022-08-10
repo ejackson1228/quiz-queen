@@ -1,6 +1,7 @@
 var initiateQuiz = function(){
     createQuestion1();
-
+    timeLeft = 120;
+    startTimer();
 
 }
 
@@ -434,7 +435,7 @@ var createHighScorePage = function() {
     highScoreForm.appendChild(highScoreFormInput);
 
     var userFinalScore = document.createElement("p");
-    userFinalScore.innerHTML = "<p> Your Score: " +  localStorage.getItem("userScore") ;
+    userFinalScore.innerHTML = "<p> Your Score: " +  timeLeft ;
     highScoreForm.appendChild(userFinalScore);
 
     var scoreSubmitbutton = document.createElement("button");
@@ -448,20 +449,26 @@ var createHighScorePage = function() {
     page7.appendChild(highScorePageButton);
 
     var saveUserName = function() {
-        localStorage.setItem("userNames", highScoreFormInput.value)
+        var submitButton = document.getElementById("submit-user-results")
+        submitButton.disabled = true; 
+        var newScore = {initials: highScoreFormInput.value, score: timeLeft}
+        highScores = JSON.parse(localStorage.getItem("highScores")) || []
+        highScores.push(newScore)
+        localStorage.setItem("highScores", JSON.stringify(highScores))
     }
     
     scoreSubmitbutton.addEventListener("click", function() {
         saveUserName();
     });
     highScorePageButton.addEventListener("click", function() {
+        document.querySelector("#page7")
+        page7.remove();
         createHighScoreList();
     });
 }
 
 var createHighScoreList = function() {
-    document.querySelector("#page7")
-    page7.remove();
+    
 
     var page8 = document.createElement("div");
     page8.id = "page8";
@@ -472,10 +479,19 @@ var createHighScoreList = function() {
     highScoreList.id = "HSList";
     highScoreList.className = "High-scores"
     highScoreList.textContent = "High Scores";
-    page8.appendChild(highScoreList);
-
     
 
+
+    highScores = JSON.parse(localStorage.getItem("highScores")) || []
+    console.log(highScores)
+    for ( let i=0; i < highScores.length; i++) {
+        var Score = highScores[i].score
+        var initials = highScores[i].initials
+        var scoreList = document.createElement("li");
+        scoreList.textContent = initials + ": " + Score;
+        highScoreList.appendChild(scoreList)
+    }
+    page8.appendChild(highScoreList);
 
 }
 
@@ -487,10 +503,12 @@ var incorrectAlert = function() {
  var correctAlert = function() {
     window.alert("Correct! On to the next question.")
 };
-
+var quizTimer;
 // timer set at 2 minutes with wrong answer subtracting time
 var timeLeft = 120;
-var quizTimer = setInterval(function(){
+
+var startTimer = function() {
+    quizTimer = setInterval(function(){
     if(timeLeft <= 0){ //if time left = 0, alert the user and go back to starting page
         clearInterval(quizTimer);
         window.alert("Time's up!");
@@ -501,15 +519,19 @@ var quizTimer = setInterval(function(){
     document.getElementById("insertTimer").value = 120 - timeLeft;
     timeLeft -= 1; //decrement timer per second
 }, 1000);
+}
 //stop timer and setItem in local storage for high score
 var saveTime = function () {
     localStorage.setItem("userScores", timeLeft);
 }
 
-var userNames  = [];
-var userScores = [];
+var highScores  = [];
 
-
+document.getElementById("highscore-page-button").addEventListener("click", function(){
+    document.querySelector("#firstpage");
+    firstpage.remove();
+    createHighScoreList();
+});
 
 console.log(saveTime)
 var stopTimer = function () {
